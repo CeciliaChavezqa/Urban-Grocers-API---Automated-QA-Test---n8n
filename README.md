@@ -22,12 +22,19 @@ El proyecto evoluciona desde pruebas manuales hacia una arquitectura de prueba t
 Para iniciar cualquier sesión de prueba en Urban Grocers, se ejecuta primero la creación de una cuenta para obtener acceso autorizado.
 
 Endpoint: POST {{baseUrl}}/api/v1/users
+
 Headers: Content-Type: application/json
+
 Parámetros del Payload:
+
 firstName (string, requerido): Nombre del usuario.
+
 phone (string, requerido): Número de teléfono.
+
 address (string, requerido): Dirección de entrega.
+
 email (string, opcional): Correo electrónico.
+
 comment (string, opcional): Comentarios adicionales.
 
 Respuesta Exitosa del Servidor (201 Created), n8n captura automáticamente el valor de authToken de la respuesta 201 y lo almacena en memoria. En las ejecuciones posteriores, el token se inyecta dinámicamente en el header de autorización.
