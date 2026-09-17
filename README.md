@@ -18,6 +18,7 @@ El proyecto evoluciona desde pruebas manuales hacia una arquitectura de prueba t
 ## 📋 Detalle del Flujo de Trabajo
 
 **1. Autenticación y Creación de Usuario (POST /api/v1/users)**
+
 Para iniciar cualquier sesión de prueba en Urban Grocers, se ejecuta primero la creación de una cuenta para obtener acceso autorizado.
 
 Endpoint: POST {{baseUrl}}/api/v1/users
