@@ -15,9 +15,25 @@ El proyecto evoluciona desde pruebas manuales hacia una arquitectura de prueba t
 * **Lenguaje:** JavaScript (Nodos `Code` para matriz de datos y aserciones)
 * **Protocolo:** HTTP / REST API (JSON)
 
+## 📋 Detalle del Flujo de Trabajo
+
+**1. Autenticación y Creación de Usuario (POST /api/v1/users)**
+Para iniciar cualquier sesión de prueba en Urban Grocers, se ejecuta primero la creación de una cuenta para obtener acceso autorizado.
+
+Endpoint: POST {{baseUrl}}/api/v1/users
+Headers: Content-Type: application/json
+Parámetros del Payload:
+firstName (string, requerido): Nombre del usuario.
+phone (string, requerido): Número de teléfono.
+address (string, requerido): Dirección de entrega.
+email (string, opcional): Correo electrónico.
+comment (string, opcional): Comentarios adicionales.
+
+Respuesta Exitosa del Servidor (201 Created), n8n captura automáticamente el valor de authToken de la respuesta 201 y lo almacena en memoria. En las ejecuciones posteriores, el token se inyecta dinámicamente en el header de autorización.
+
 ## 📋 Estructura del Flujo en n8n
 
 ```text
 [Start] ➔ [Edit Fields (baseUrl)] ➔ [POST /api/v1/users] ➔ [Code (Test Matrix)] ➔ [POST /api/v1/kits] ➔ [Code (Test Reporter)]
 
-## 📋 Estructura del Flujo en n8n
+
