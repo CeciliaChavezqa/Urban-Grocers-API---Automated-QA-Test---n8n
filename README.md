@@ -25,7 +25,7 @@ Para iniciar cualquier sesión de prueba en Urban Grocers, se ejecuta primero la
 
 🧪Headers: Content-Type: application/json
 
-**Parámetros del Payload:**
+**Parámetros:**
 
 🧪firstName (string, requerido): Nombre del usuario.
 
