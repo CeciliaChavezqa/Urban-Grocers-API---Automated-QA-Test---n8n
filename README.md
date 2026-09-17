@@ -19,3 +19,5 @@ El proyecto evoluciona desde pruebas manuales hacia una arquitectura de prueba t
 
 ```text
 [Start] ➔ [Edit Fields (baseUrl)] ➔ [POST /api/v1/users] ➔ [Code (Test Matrix)] ➔ [POST /api/v1/kits] ➔ [Code (Test Reporter)]
+
+📋 **Detalle del Flujo de Trabajo**
