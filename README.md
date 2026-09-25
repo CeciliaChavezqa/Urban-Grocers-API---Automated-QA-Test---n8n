@@ -1,5 +1,5 @@
 # Urban-Grocers-API-Automated-QA-Test-n8n
-El proyecto evoluciona desde pruebas manuales hacia una arquitectura de prueba totalmente automatizada con propagación dinámica de autenticación, análisis de valores límite, respuestas reales de la API y estatus/resukltados esperados vs resultados actuales para la generación de reportes en tiempo real.
+El proyecto evoluciona desde pruebas manuales hacia una arquitectura de prueba totalmente automatizada con propagación dinámica de autenticación, análisis de valores límite, respuestas reales de la API y estatus/resultados esperados vs resultados actuales para la generación de reportes en tiempo real.
 
 🚀 **Características Principales**
 
