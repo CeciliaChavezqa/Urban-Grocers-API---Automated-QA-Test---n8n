@@ -39,6 +39,32 @@ Para iniciar cualquier sesión de prueba en Urban Grocers, se ejecuta primero la
 
 Respuesta Exitosa del Servidor (201 Created), n8n captura automáticamente el valor de authToken de la respuesta 201 y lo almacena en memoria. En las ejecuciones posteriores, el token se inyecta dinámicamente en el header de autorización.
 
+**2. Creación de Kit y Tolerancia a Fallos (POST /api/v1/kits)**
+
+El endpoint para crear un kit requiere establecer el contexto asociándolo a un usuario específico o a una tarjeta. Para este paso, utilizamos el contexto del usuario generado en el paso anterior.
+
+**Reglas de Negocio (Autorización):** 
+
+🧪Es obligatorio enviar el encabezado Authorization o el parámetro cardId para poder crear un kit.   
+
+🧪Si la solicitud carece de ambos parámetros, el sistema devolverá un error.   
+
+🧪Si se proporciona un encabezado Authorization con un authToken válido, el kit se asignará automáticamente a ese usuario en particular.   
+
+🧪En caso de enviar tanto el Authorization como el cardId, el encabezado de autorización tiene prioridad absoluta.   
+
+**Headers:**
+
+Authorization: Definido en formato Bearer {authToken}.  
+
+Content-Type: Establecido por defecto como application/json.   
+
+Parámetros del Payload:name (string): El nombre asignado al kit, el cual se escribe directamente en el campo correspondiente de la tabla kit_model.   
+
+cardId (number, opcional): El ID correspondiente a la tabla card_model (omitido en nuestra suite para priorizar la prueba por autorización de usuario). 
+
+El nodo está configurado de manera explícita con Continue Regular Routing. Esto garantiza que cuando la matriz inyecte datos inválidos (como el escenario de nombre vacío documentado en el Bug Report) y el servidor devuelva errores HTTP (400+), el flujo no se interrumpa, permitiendo que el reporte final registre la discrepancia.
+
 ## 📋 Estructura del Flujo en n8n
 
 ```text
