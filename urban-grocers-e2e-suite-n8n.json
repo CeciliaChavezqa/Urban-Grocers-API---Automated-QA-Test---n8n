@@ -1,0 +1,193 @@
+{
+  "name": "Urban Grocers",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2e8f9780-2f33-411a-bdd4-0261b7d735c2",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f620227d-921d-4122-8a61-bd25f504d216",
+              "name": "baseUrl",
+              "value": "https://cnt-43ab3770-b2ee-4909-8fb6-70c5089eed15.containerhub.tripleten-services.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "024293de-b759-4994-bf4a-1606aefa2801",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.baseUrl }}/api/v1/users",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"firstName\": \"Cecilia\",\n  \"address\": \"Calle Principal 123\",\n  \"phone\": \"+12345678901\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "e1c68972-5331-4eed-8e37-40381e96c89c",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Edit Fields').item.json.baseUrl }}/api/v1/kits",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('HTTP Request').item.json.authToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $json.kitName }}\"\n}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        880,
+        0
+      ],
+      "id": "41edf3fb-fe65-415a-993a-2ecba6d7bd66",
+      "name": "HTTP Request1",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  { json: { testName: \"Nombre válido corto (1 carácter)\", kitName: \"A\", expectedStatus: 201 } },\n  { json: { testName: \"Nombre vacío (0 caracteres)\", kitName: \"\", expectedStatus: 400 } },\n  { json: { testName: \"Caracteres especiales\", kitName: \"Kit_#$&%\", expectedStatus: 201 } }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        0
+      ],
+      "id": "f9236241-80c5-449f-befd-b129eb05e0d9",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\n// Obtenemos los casos de prueba originales de tu matriz\nconst testMatrix = $('Code in JavaScript').all(); \n\n// Evaluamos cada ejecución\nfor (let i = 0; i < items.length; i++) {\n    const actualStatus = items[i].json.statusCode;\n    const expectedStatus = testMatrix[i].json.expectedStatus;\n    const testName = testMatrix[i].json.testName;\n    \n    // Aserción QA: ¿El status real coincide con el esperado?\n    let testResult = \"FAIL ❌\";\n    if (actualStatus === expectedStatus) {\n        testResult = \"PASS ✅\";\n    }\n\n    // Armamos la fila del reporte\n    results.push({\n        json: {\n            \"Test Name\": testName,\n            \"Expected\": expectedStatus,\n            \"Actual\": actualStatus,\n            \"Status\": testResult,\n            \"Body\": items[i].json.body\n        }\n    });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1152,
+        0
+      ],
+      "id": "57b70544-5767-49aa-83cc-907d1e9d0a26",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "07eff059-ebf1-4886-b8d0-b998e95539a2",
+  "meta": {
+    "instanceId": "a38c9a7fac2a0a8a30c2f1f28a1ee1376b10ed4b84f3793c80faa05523602df6"
+  },
+  "nodeGroups": [],
+  "id": "uCnYTgU4n78oOLeN",
+  "tags": []
+}
