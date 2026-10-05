@@ -160,7 +160,13 @@ return results;
 
 ## 🎬 Demo de Ejecución en Tiempo Real. 
 
-https://github.com/user-attachments/assets/49897cee-87ce-46a7-bfa0-7fc3f9889ac7
+
+
+
+
+https://github.com/user-attachments/assets/a716be1a-24ab-45ea-bbfe-6ea939247b85
+
+
 
 
 
