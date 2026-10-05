@@ -65,7 +65,7 @@ cardId (number, opcional): El ID correspondiente a la tabla card_model (omitido 
 
 El nodo está configurado de manera explícita con Continue Regular Routing. Esto garantiza que cuando la matriz inyecte datos inválidos (como el escenario de nombre vacío documentado en el Bug Report) y el servidor devuelva errores HTTP (400+), el flujo no se interrumpa, permitiendo que el reporte final registre la discrepancia.
 
-**Matriz de Pruebas Data-Driven (`Code Node: Test Matrix`)**
+**⚪Matriz de Pruebas Data-Driven (`Code Node: Test Matrix`)**
 Genera la lista de escenarios límites para validar la creación de Kits:
 
 Compara el código de estado real recibido contra el esperado y genera el reporte consolidado:
