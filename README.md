@@ -148,13 +148,19 @@ return results;
 <img width="1915" height="873" alt="Captura de pantalla 2026-10-05 141249" src="https://github.com/user-attachments/assets/b6f63bac-9e39-4327-9ed9-b8d7887b0635" />
 
 
+
 **Tabla de Resultados del Reporter**
+
 
 
 <img width="1908" height="873" alt="image" src="https://github.com/user-attachments/assets/c9085ce2-2d0b-40a4-9cf3-a3602e4cee5b" />
 
 
 
+
+## 🎬 Demo de Ejecución en Tiempo Real. 
+
+https://github.com/user-attachments/assets/49897cee-87ce-46a7-bfa0-7fc3f9889ac7
 
 
 
