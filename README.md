@@ -141,6 +141,9 @@ return results;
 
 - Haz clic en el botón Execute Workflow en la parte inferior.
 
+- <img width="1848" height="711" alt="Captura de pantalla 2026-09-11 172045" src="https://github.com/user-attachments/assets/035dc0a6-f731-47c2-a606-2697cbf3db4b" />
+
+
 
 
 
