@@ -1,6 +1,18 @@
 # Urban-Grocers-API-Automated-QA-Test-n8n
 El proyecto evoluciona desde pruebas manuales hacia una arquitectura de prueba totalmente automatizada con propagación dinámica de autenticación, análisis de valores límite, respuestas reales de la API y estatus/resultados esperados vs resultados actuales para la generación de reportes en tiempo real.
 
+Este repositorio alberga el marco de automatización **End-to-End y Data-Driven (DDT)** diseñado para validar la API REST de **Urban Grocers**. 
+
+El proyecto resuelve la ineficiencia y el margen de error de las validaciones manuales mediante la orquestación de un flujo resiliente en **n8n**, capaz de gestionar estados de autenticación dinámicos, inyectar matrices de prueba de valores límite y auditar respuestas HTTP en tiempo real.
+
+**Estrategias de QA Aplicadas:**
+
+💡Nombres válidos cortos, caracteres especiales y cadenas vacías (0 caracteres).
+
+💡Propagación dinámica de cabeceras de autorización entre nodos sin dependencias externas.
+
+💡Configuración de ruteo tolerante a fallos (400+ Bad Request) para evitar el colapso del workflow durante la ejecución de escenarios límite.
+
 🚀 **Características Principales**
 
 * **Arquitectura E2E Completa:** Creación dinámica de usuarios, captura de `authToken` (JWT) y reutilización de contexto entre peticiones.
@@ -106,6 +118,28 @@ return results;
 ## 🔄 Estructura del Flujo en n8n
 
 [Start] ➔ [Edit Fields (baseUrl)] ➔ [POST /api/v1/users] ➔ [Code (Test Matrix)] ➔ [POST /api/v1/kits] ➔ [Code (Test Reporter)]
+
+## 📦Cómo Importar y Ejecutar este Proyecto.
+
+**1. Requisitos previos: Tener Node.js e iniciar n8n localmente:**
+
+- npx n8n
+
+**2.Importar en n8n:**
+
+- Abre la interfaz web de n8n (http://localhost:5678).
+
+- Haz clic en los tres puntos (...) en la esquina superior izquierda del canvas.
+
+- Selecciona Import from File y carga el archivo urban-grocers-e2e-suite.json.
+
+**3.Configurar la URL Base:**
+
+- Abre el nodo Edit Fields y actualiza el valor de baseUrl con la URL activa de tu servidor de Urban Grocers.
+
+**4.Ejecutar:**
+
+- Haz clic en el botón Execute Workflow en la parte inferior.
 
 
 
