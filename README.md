@@ -37,7 +37,7 @@ Para iniciar cualquier sesión de prueba en Urban Grocers, se ejecuta primero la
 
 🧪comment (string, opcional): Comentarios adicionales.
 
-Respuesta Exitosa del Servidor (201 Created), n8n captura automáticamente el valor de authToken de la respuesta 201 y lo almacena en memoria. En las ejecuciones posteriores, el token se inyecta dinámicamente en el header de autorización.
+**Manejo de Contexto:** Respuesta exitosa `201 Created`. n8n captura automáticamente el valor de `authToken` de la respuesta y lo almacena en memoria. En las ejecuciones posteriores, el token se inyecta dinámicamente en el header de autorización (`Authorization: Bearer {{ $json.authToken }}`).
 
 **2. Creación de Kit y Tolerancia a Fallos (POST /api/v1/kits)**
 
@@ -65,9 +65,48 @@ cardId (number, opcional): El ID correspondiente a la tabla card_model (omitido 
 
 El nodo está configurado de manera explícita con Continue Regular Routing. Esto garantiza que cuando la matriz inyecte datos inválidos (como el escenario de nombre vacío documentado en el Bug Report) y el servidor devuelva errores HTTP (400+), el flujo no se interrumpa, permitiendo que el reporte final registre la discrepancia.
 
-## 📋 Estructura del Flujo en n8n
+**Matriz de Pruebas Data-Driven (`Code Node: Test Matrix`)**
+Genera la lista de escenarios límites para validar la creación de Kits:
 
-```text
+**3. Motor de Aserciones (Code Node: Test Reporter)**
+
+Compara el código de estado real recibido contra el esperado y genera el reporte consolidado:
+
+```javascript
+return [
+  { json: { testName: "Nombre válido corto (1 carácter)", kitName: "A", expectedStatus: 201 } },
+  { json: { testName: "Nombre vacío (0 caracteres)", kitName: "", expectedStatus: 400 } },
+  { json: { testName: "Caracteres especiales", kitName: "Kit_#$&%", expectedStatus: 201 } }
+];
+
+const results = [];
+const testMatrix = $('Code in JavaScript').all(); 
+
+for (let i = 0; i < items.length; i++) {
+    const actualStatus = items[i].json.statusCode;
+    const expectedStatus = testMatrix[i].json.expectedStatus;
+    const testName = testMatrix[i].json.testName;
+    
+    let testResult = (actualStatus === expectedStatus) ? "PASS ✅" : "FAIL ❌";
+
+    results.push({
+        json: {
+            "Test Name": testName,
+            "Expected": expectedStatus,
+            "Actual": actualStatus,
+            "Status": testResult,
+            "Body": items[i].json.body
+        }
+    });
+}
+return results;
+
+## 🔄 Estructura del Flujo en n8n
+
 [Start] ➔ [Edit Fields (baseUrl)] ➔ [POST /api/v1/users] ➔ [Code (Test Matrix)] ➔ [POST /api/v1/kits] ➔ [Code (Test Reporter)]
+
+
+
+
 
 
