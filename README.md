@@ -78,6 +78,10 @@ return [
   { json: { testName: "Nombre vacío (0 caracteres)", kitName: "", expectedStatus: 400 } },
   { json: { testName: "Caracteres especiales", kitName: "Kit_#$&%", expectedStatus: 201 } }
 ];
+```
+**3. Motor de Aserciones (Code Node: Test Reporter)**
+
+Compara el código de estado real recibido contra el esperado y genera el reporte consolidado:
 
 const results = [];
 const testMatrix = $('Code in JavaScript').all(); 
@@ -104,6 +108,10 @@ return results;
 ## 🔄 Estructura del Flujo en n8n
 
 [Start] ➔ [Edit Fields (baseUrl)] ➔ [POST /api/v1/users] ➔ [Code (Test Matrix)] ➔ [POST /api/v1/kits] ➔ [Code (Test Reporter)]
+
+
+
+
 
 
 
