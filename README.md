@@ -17,7 +17,7 @@ El proyecto evoluciona desde pruebas manuales hacia una arquitectura de prueba t
 
 ## 📋 Detalle del Flujo de Trabajo
 
-**1. Autenticación y Creación de Usuario (POST /api/v1/users)**
+**⬜1. Autenticación y Creación de Usuario (POST /api/v1/users)**
 
 Para iniciar cualquier sesión de prueba en Urban Grocers, se ejecuta primero la creación de una cuenta para obtener acceso autorizado.
 
@@ -39,7 +39,7 @@ Para iniciar cualquier sesión de prueba en Urban Grocers, se ejecuta primero la
 
 **Manejo de Contexto:** Respuesta exitosa `201 Created`. n8n captura automáticamente el valor de `authToken` de la respuesta y lo almacena en memoria. En las ejecuciones posteriores, el token se inyecta dinámicamente en el header de autorización (`Authorization: Bearer {{ $json.authToken }}`).
 
-**2. Creación de Kit y Tolerancia a Fallos (POST /api/v1/kits)**
+**⬜2. Creación de Kit y Tolerancia a Fallos (POST /api/v1/kits)**
 
 El endpoint para crear un kit requiere establecer el contexto asociándolo a un usuario específico o a una tarjeta. Para este paso, utilizamos el contexto del usuario generado en el paso anterior.
 
@@ -68,8 +68,6 @@ El nodo está configurado de manera explícita con Continue Regular Routing. Est
 **Matriz de Pruebas Data-Driven (`Code Node: Test Matrix`)**
 Genera la lista de escenarios límites para validar la creación de Kits:
 
-**3. Motor de Aserciones (Code Node: Test Reporter)**
-
 Compara el código de estado real recibido contra el esperado y genera el reporte consolidado:
 
 ```javascript
@@ -79,7 +77,7 @@ return [
   { json: { testName: "Caracteres especiales", kitName: "Kit_#$&%", expectedStatus: 201 } }
 ];
 ```
-**3. Motor de Aserciones (Code Node: Test Reporter)**
+**⬜3. Motor de Aserciones (Code Node: Test Reporter)**
 
 Compara el código de estado real recibido contra el esperado y genera el reporte consolidado:
 
