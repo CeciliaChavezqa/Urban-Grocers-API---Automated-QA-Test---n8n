@@ -169,7 +169,10 @@ https://github.com/user-attachments/assets/b571416a-3b69-41a7-a67b-f666641ff7d9
 
 
 
+## 👤 Autor
 
+**Cecilia Mena Chavez | Ingeniera en Tecnología Automotriz | QA Engineer**
+"Transformando la precisión técnica en software confiable."
 
 
 
